@@ -29,9 +29,8 @@ The system follows a standard RAG architecture:
 6. Responses are presented through a Streamlit-based interface.  
 
 
-## Project Structure
-```text
-.
+## Project Structure## Installation and Setup
+
 ├── create_memory_for_llm.py        # One-time FAISS vector database creation
 ├── connect_memory_with_llm.py      # RAG query pipeline (CLI-based)
 ├── medibot.py                      # Streamlit user interface
@@ -42,7 +41,8 @@ The system follows a standard RAG architecture:
 ├── README.md                       # Project documentation
 └── .gitignore                      # Git ignore rules
 
-## Installation and Setup
+
+
 
 ### Prerequisites
 - Python version 3.10 or higher
@@ -124,3 +124,4 @@ The Streamlit interface provides an interactive chat-based experience for queryi
 
 ## License
 This project is provided for educational and research purposes. A specific license may be added depending on distribution and usage requirements.
+
