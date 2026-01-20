@@ -30,7 +30,7 @@ The system follows a standard RAG architecture:
 
 
 ## Project Structure## Installation and Setup
-
+```text
 ├── create_memory_for_llm.py        # One-time FAISS vector database creation
 ├── connect_memory_with_llm.py      # RAG query pipeline (CLI-based)
 ├── medibot.py                      # Streamlit user interface
@@ -40,7 +40,7 @@ The system follows a standard RAG architecture:
 ├── pyproject.toml                  # Project configuration
 ├── README.md                       # Project documentation
 └── .gitignore                      # Git ignore rules
-
+```
 
 
 
@@ -51,8 +51,10 @@ The system follows a standard RAG architecture:
 - A valid Groq API key
 
 ### Step 1: Clone the Repository
+```bash
 git clone https://github.com/tsewangnamgail/Medical_Chatbot.git
 cd Medical_Chatbot
+```
 
 python
 Copy code
@@ -60,21 +62,27 @@ Copy code
 ### Step 2: Create and Activate a Virtual Environment
 
 macOS or Linux:
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
 
 makefile
 Copy code
 
 Windows:
+```bash
 python -m venv .venv
 .venv\Scripts\activate
+```
 
 shell
 Copy code
 
 ### Step 3: Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
 csharp
 Copy code
@@ -104,13 +112,17 @@ This process:
 ### Step 6: Run the Application
 
 Command-line interface:
+```bash
 python connect_memory_with_llm.py
+```
 
 csharp
 Copy code
 
 Streamlit web interface:
+```bash
 streamlit run medibot.py
+```
 
 pgsql
 Copy code
@@ -124,4 +136,5 @@ The Streamlit interface provides an interactive chat-based experience for queryi
 
 ## License
 This project is provided for educational and research purposes. A specific license may be added depending on distribution and usage requirements.
+
 
