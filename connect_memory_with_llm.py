@@ -1,0 +1,61 @@
+import os
+
+from langchain_groq import ChatGroq
+from langchain_community.vectorstores import FAISS
+from langchain_huggingface import HuggingFaceEmbeddings
+
+from langchain import hub
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+
+from dotenv import load_dotenv
+load_dotenv()
+
+# Step 1: Setup Groq LLM
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+GROQ_MODEL_NAME = "llama-3.3-70b-versatile"
+
+llm = ChatGroq(
+    model=GROQ_MODEL_NAME,
+    temperature=0.5,
+    max_tokens=512,
+    api_key=GROQ_API_KEY,
+)
+
+# Step 2: Load Database
+DB_FAISS_PATH = "vectorstore/db_faiss"
+embedding_model = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+
+db = FAISS.load_local(
+    DB_FAISS_PATH,
+    embedding_model,
+    allow_dangerous_deserialization=True
+)
+
+# Step 3: Build RAG chain (UNCHANGED)
+retrieval_qa_chat_prompt = hub.pull("langchain-ai/retrieval-qa-chat")
+
+combine_docs_chain = create_stuff_documents_chain(
+    llm,
+    retrieval_qa_chat_prompt
+)
+
+rag_chain = create_retrieval_chain(
+    db.as_retriever(search_kwargs={'k': 3}),
+    combine_docs_chain
+)
+
+# Step 4: Query
+user_query = input("Write Query Here: ")
+response = rag_chain.invoke({'input': user_query})
+
+# ✅ ONLY FIX: remove * and **
+clean_answer = response["answer"].replace("*", "")
+
+print("RESULT:", clean_answer)
+
+print("\nSOURCE DOCUMENTS:")
+for doc in response["context"]:
+    print(f"- {doc.metadata} -> {doc.page_content[:200]}...")
