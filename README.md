@@ -173,7 +173,3 @@ A `Jenkinsfile` is included for CI/CD automation. It defines a pipeline that:
 
 ## License
 This project is provided for educational and research purposes. A specific license may be added depending on distribution and usage requirements.
-
-
-
->>>>>>> 44565e1 (Add Docker, Jenkins, and Kubernetes deployment files)
